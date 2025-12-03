@@ -59,35 +59,42 @@ class extraCheeseTopping : public toppingDecorator {
         }
 };
 class veggiesTopping : public toppingDecorator {
-    explicit veggiesTopping(shared_ptr<basePizza> pizza) : toppingDecorator(move(pizza)){}
-    string getDescription() const override {
-        return pizza_->getDescription() + " + Veggies";
-    }
-    double getCost() const override {
-        return pizza_->getCost() + 30.0;
-    }
+    public:
+        explicit veggiesTopping(shared_ptr<basePizza> pizza) : toppingDecorator(move(pizza)){}
+        string getDescription() const override {
+            return pizza_->getDescription() + " + Veggies";
+        }
+        double getCost() const override {
+            return pizza_->getCost() + 30.0;
+        }
 };
 class mushroomTopping : public toppingDecorator {
-    explicit mushroomTopping(shared_ptr<basePizza> pizza) : toppingDecorator(move(pizza)){}
-    string getDescription() const override {
-        return pizza_->getDescription() + " + Mushroom";
-    }
-    double getCost() const override {
-        return pizza_->getCost() + 40.0;
-    }
+    public:
+        explicit mushroomTopping(shared_ptr<basePizza> pizza) : toppingDecorator(move(pizza)){}
+        string getDescription() const override {
+            return pizza_->getDescription() + " + Mushroom";
+        }
+        double getCost() const override {
+            return pizza_->getCost() + 40.0;
+        }
 };
 class pepperoniTopping : public toppingDecorator {
-    explicit pepperoniTopping(shared_ptr<basePizza> pizza) : toppingDecorator(move(pizza)){}
-    string getDescription() const override {
-        return pizza_->getDescription() + " + Pepperoni";
-    }
-    double getCost() const override {
-        return pizza_->getCost() + 50.0;
-    }
+    public:
+        explicit pepperoniTopping(shared_ptr<basePizza> pizza) : toppingDecorator(move(pizza)){}
+        string getDescription() const override {
+            return pizza_->getDescription() + " + Pepperoni";
+        }
+        double getCost() const override {
+            return pizza_->getCost() + 50.0;
+        }
 };
 int main(){
     cout << "======= Decorator Design Pattern ======\n";
     shared_ptr<basePizza> pizza1 = make_shared<plainPizza>();
     cout<<"Order 1: "<<pizza1->getDescription()<<" = Rs."<<pizza1->getCost()<<endl;
+    shared_ptr<basePizza> pizza2 = make_shared<extraCheeseTopping>(make_shared<plainPizza>());
+    cout<<"Order 2: "<<pizza2->getDescription()<<" = Rs."<<pizza2->getCost()<<endl;
+    shared_ptr<basePizza> pizza3 = make_shared<veggiesTopping>(make_shared<extraCheeseTopping>(make_shared<plainPizza>()));
+    cout<<"Order 3: "<<pizza3->getDescription()<<" = Rs."<<pizza3->getCost()<<endl;
     return 0;
 };
